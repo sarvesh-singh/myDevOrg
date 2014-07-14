@@ -1,0 +1,7 @@
+<apex:page standardStylesheets="false" showHeader="false" sidebar="false" contenttype="text/cache-manifest" cache="false" expires="0">CACHE MANIFEST
+# version 1.0
+CACHE:
+/OfflineHome
+NETWORK:
+*
+</apex:page>

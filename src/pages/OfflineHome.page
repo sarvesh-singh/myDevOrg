@@ -1,0 +1,14 @@
+<apex:page docType="html-5.0" standardStylesheets="false" showHeader="false" sidebar="false" contentType="text/html" >
+<html manifest="/apex/OfflineAppCache">
+    <head>
+        <script>
+            window.onerror = function(msg, url, ln){
+                alert("ERROR : "+msg+". /n Line Number : "+ln);
+            }
+        </script>
+    </head>
+    <body>
+        <h3>Offline Visual Page</h3>
+    </body>
+</html>
+</apex:page>

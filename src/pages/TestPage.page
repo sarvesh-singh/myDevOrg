@@ -1,0 +1,67 @@
+<apex:page >
+	<apex:define name="title">Test VF page with Smart Store</apex:define>
+	<apex:includeScript value="{!$Resource.CORDOVA}"/>
+	<apex:includeScript value="{!$Resource.SFHybridApp}"/>
+	<apex:includeScript value="{!$Resource.SalesforceOAuthPlugin}"/>
+	<apex:includeScript value="{!$Resource.ForceTk}"/>
+	<apex:includeScript value="{!$Resource.SmartStore}"/>
+  	<script>
+  		window.onload = function(){
+  			var forcetkClient;
+   			var debugMode = true;
+    		var logToConsole = cordova.require("salesforce/util/logger").logToConsole;
+			document.addEventListener("salesforceSessionRefresh",salesforceSessionRefreshed,false);
+  			
+  			var button = document.getElementById ("testButton");
+  			if (button.addEventListener) {
+                button.addEventListener ("mousedown", function () {}, false);
+                button.addEventListener ("mouseup", function () {}, false);
+                button.addEventListener("touchstart", function(){
+                	logToConsole('## hmm I can work from here');
+                	logToConsole(!!navigator.smartstore);
+                	//logToConsole(!!PhoneGap);
+                	for(name in navigator){
+                		//logToConsole(name);
+                	}
+                	var indexesAlbums = [
+			            {path:"Name",type:"string"},
+			            {path:"Id",type:"string"}
+			        ];
+					logToConsole(typeof navigator.smartstore.registerSoup);
+			        navigator.smartstore.registerSoup('ALBUMS_SOUP_NAME',
+			                                        indexesAlbums,
+			                                        function(){alert('SUCCESS');},
+			                                        function(){alert('ERROR');});
+			                	
+                }, false);
+ 				//button.addEventListener("touchend", function(){alert('touch end');}, false);
+            }
+            function salesforceSessionRefreshed(creds) {
+		        logToConsole("salesforceSessionRefreshed");
+		        
+		        // Depending on how we come into this method, `creds` may be callback data from the auth
+		        // plugin, or an event fired from the plugin.  The data is different between the two.
+		        var credsData = creds;
+		        if (creds.data)  // Event sets the `data` object with the auth data.
+		            credsData = creds.data;
+		
+		        forcetkClient = new forcetk.Client(credsData.clientId, credsData.loginUrl);
+		        forcetkClient.setSessionToken(credsData.accessToken, apiVersion, credsData.instanceUrl);
+		        forcetkClient.setRefreshToken(credsData.refreshToken);
+		        forcetkClient.setUserAgentString(credsData.userAgent);
+		    }
+		
+		
+		    function getAuthCredentialsError(error) {
+		        logToConsole("getAuthCredentialsError: " + error);
+		    }
+  		}
+  		
+  		
+  	</script>
+  	<apex:define name="body">
+  		<div id="test">
+			<button id="testButton">Test button</button>
+		</div>
+  	</apex:define>
+</apex:page>

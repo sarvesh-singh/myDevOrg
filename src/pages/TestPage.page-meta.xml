@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>27.0</apiVersion>
+    <description>Test Page for using VF pages in my mobile app</description>
+    <label>TestPage</label>
+    <packageVersions>
+        <majorNumber>2</majorNumber>
+        <minorNumber>8</minorNumber>
+        <namespace>ModelM</namespace>
+    </packageVersions>
+</ApexPage>
